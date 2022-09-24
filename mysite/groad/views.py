@@ -66,11 +66,11 @@ class Groad_user_login(APIView):
             "gu_seq": -1
         }
 
-        id = request.data['gu_id']
+        id1 = request.data['gu_id']
         pw = request.data['gu_pw']
         try:
-            user1 = user.objects.get(gu_id=id, gu_pw=pw)
-            serializer_user = LoginSerializer(user)
+            user1 = user.objects.get(gu_id=id1, gu_pw=pw)
+            serializer_user = LoginSerializer(user1)
         except:
             return JsonResponse(error_data)
 
