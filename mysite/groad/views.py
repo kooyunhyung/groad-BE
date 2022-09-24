@@ -53,6 +53,7 @@ class Groad_user_List(APIView):
             connection.commit()
         except Exception as e:
             connection.rollback()
+            print(e)
             return Response(e)
         finally:
             cur.close()
