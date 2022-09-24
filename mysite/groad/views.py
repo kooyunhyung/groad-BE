@@ -53,8 +53,7 @@ class Groad_user_List(APIView):
             connection.commit()
         except Exception as e:
             connection.rollback()
-            print(e)
-            return Response(e)
+            return JsonResponse(error_code)
         finally:
             cur.close()
         return JsonResponse(sucess_code)
@@ -83,7 +82,7 @@ class Groad_user_Detail(APIView):
 
     def get_object(self, pk):
         user1 = get_object_or_404(user, pk=pk)
-        return user
+        return user1
 
     def get(self, request, pk):
         user = self.get_object(pk)
