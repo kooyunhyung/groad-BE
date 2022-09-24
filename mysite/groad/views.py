@@ -51,9 +51,9 @@ class Groad_user_List(APIView):
             cur = connection.cursor()
             cur.execute(sql)
             connection.commit()
-        except:
+        except Exception as e:
             connection.rollback()
-            return JsonResponse(error_code)
+            return Response(e)
         finally:
             cur.close()
         return JsonResponse(sucess_code)
