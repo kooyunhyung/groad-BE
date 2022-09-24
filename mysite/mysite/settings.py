@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'groaddb',
         'USER': 'admin',
-        'PASSWORD': '@wer273524178',
+        'PASSWORD': 'wer273524178',
         'HOST': 'groaddb.csz7kd2dcazm.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
     }
