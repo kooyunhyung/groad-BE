@@ -3,14 +3,20 @@ from django.db import models
 import datetime
 import os
 import uuid
+from django.utils import timezone
 
-def file_upload_path(instance, filename):
-    ext = filename.split('.')[-1]
-    d = datetime.datetime.now()
-    filepath = d.strftime("%Y/%m/%d")
-    suffix = d.strftime("%Y%m%d%H%M%S")
-    filename = "%s_%s_%s" % (uuid.uuid4().hex, suffix, ext)
-    return os.path.join(filepath, filename)
+def date_upload_to(instance, filename):
+    # upload_to="%Y/%m/%d" 처럼 날짜로 세분화
+    ymd_path = timezone.now().strftime('%Y/%m/%d')
+    # 길이 32 인 uuid 값
+    uuid_name = uuid.uuid4().hex
+    # 확장자 추출
+    extension = os.path.splitext(filename)[-1].lower()
+    # 결합 후 return
+    return '/'.join([
+        ymd_path,
+        uuid_name + extension,
+    ])
 
 
 # Create your models here.
@@ -41,14 +47,13 @@ class review(models.Model):
     gr_name = models.CharField(max_length=10, verbose_name='닉네임', null=True)
     gr_place = models.CharField(max_length=20, verbose_name='장소', null=True)
     gr_content_text = models.CharField(max_length=100, verbose_name='코멘트', null=True)
-    gr_content_image = models.ImageField(upload_to=file_upload_path, null=True)
     gr_grade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)],
                                    verbose_name='평점', default=0, null=True)
     gr_auth_count = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
-                                           verbose_name='댓글수', default=0, null=True)
+                                        verbose_name='댓글수', default=0, null=True)
     gr_comment_count = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
                                            verbose_name='댓글수', default=0, null=True)
-    gr_date = models.DateTimeField(null=True,default=0,verbose_name='게시 시간')
+    gr_date = models.DateTimeField(null=True, default=0, verbose_name='게시 시간')
     gr_gu_seq = models.ForeignKey(user, verbose_name='리뷰어', on_delete=models.CASCADE, related_name='gr_gu_seq')
 
 

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -29,7 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['15.165.25.66']
 
-MEDIA_ROOT = "C:/Users/kooyh/StudioProjects/gload_app/assets/imageUpload"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 MEDIA_URL = '/media/'
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = '2621440'
