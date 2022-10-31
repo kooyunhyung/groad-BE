@@ -296,7 +296,7 @@ class Groad_review_Detial(APIView):
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
         sql = f"""UPDATE groad_review SET 
-        gr_nickname='{gr_nickname}',gr_place='{gr_place}', gr_comment='{gr_comment}', gr_grade='{gr_grade}', gr_gu_seq_id = '{gr_gu_seq_id}' 
+        gr_nickname='{gr_nickname}',gr_place='{gr_place}', gr_comment='{gr_comment}', gr_grade='{gr_grade}', gr_gu_seq_id='{gr_gu_seq_id}' 
         WHERE gr_gu_seq_id={fk}"""
 
         try:

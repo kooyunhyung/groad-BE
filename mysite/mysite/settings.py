@@ -29,6 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['15.165.25.66']
 
+MEDIA_ROOT = "C:/Users/kooyh/StudioProjects/gload_app/assets/imageUpload"
+MEDIA_URL = '/media/'
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = '2621440'
+
 
 # Application definition
 
