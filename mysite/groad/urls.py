@@ -1,5 +1,7 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.conf.urls.static import static
+from django.conf import settings
 
 from . import views
 
@@ -17,6 +19,6 @@ urlpatterns = [
     path('alarm/<int:fk>/', views.Groad_alarm_Detail.as_view()),    # alarm의 Detail 목록
     path('qrcode/', views.Groad_qrcode_List.as_view()),             # qrcode의 목록
     path('qrcode/<int:fk>/', views.Groad_qrcode_Detail.as_view()),  # qrcode의 Detail 목록
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = format_suffix_patterns(urlpatterns)
