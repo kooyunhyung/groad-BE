@@ -268,7 +268,7 @@ class Groad_review_List(APIView):
 # review의 detail을 보여주는 역할
 class Groad_review_Detial(APIView):
     def get(self, request, fk):
-        sql = f"""SELECT gr_seq, gr_name, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count,gr_date FROM groad_review INNER JOIN groad_user 
+        sql = f"""SELECT gr_seq, gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count,gr_date FROM groad_review INNER JOIN groad_user 
         ON gr_gu_seq_id=gu_seq WHERE gr_gu_seq_id={fk}
         """
 
