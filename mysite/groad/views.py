@@ -1,7 +1,5 @@
-from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
-from django.shortcuts import render
-from rest_framework import status, generics
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
@@ -251,15 +249,15 @@ class Groad_review_List(APIView):
         gr_date = data.get('gr_date')
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
-
-        sql = f"""INSERT INTO groad_review(gr_name, gr_place, gr_content_text, gr_grade,gr_auth_count,gr_comment_count,gr_date, gr_gu_seq_id)
-            value('{gr_name}','{gr_place}','{gr_content_text}','{gr_grade}','{gr_auth_count}','{gr_comment_count}','{gr_date}','{gr_gu_seq_id}')"""
+        sql = f"""INSERT INTO groad_review(gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count, gr_date)
+            value('{gr_name}','{gr_place}','{gr_content_text}','{gr_grade}','{gr_gu_seq_id}','{gr_auth_count}','{gr_comment_count}','{gr_date}')"""
 
         try:
             cur = connection.cursor()
             cur.execute(sql)
             connection.commit()
-        except:
+        except Exception as e:
+            print(e)
             connection.rollback()
             return JsonResponse(error_code)
         finally:
@@ -270,7 +268,7 @@ class Groad_review_List(APIView):
 # review의 detail을 보여주는 역할
 class Groad_review_Detial(APIView):
     def get(self, request, fk):
-        sql = f"""SELECT gr_seq, gr_name, gr_content_text, gr_grade, gr_auth_count, gr_comment_count,gr_date, gr_gu_seq_id FROM groad_review INNER JOIN groad_user 
+        sql = f"""SELECT gr_seq, gr_name, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count,gr_date FROM groad_review INNER JOIN groad_user 
         ON gr_gu_seq_id=gu_seq WHERE gr_gu_seq_id={fk}
         """
 
@@ -304,7 +302,7 @@ class Groad_review_Detial(APIView):
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
         sql = f"""UPDATE groad_review SET 
-        gr_name='{gr_name}',gr_place='{gr_place}', gr_content_text='{gr_content_text}', gr_grade='{gr_grade}',gr_auth_count='{gr_auth_count}',gr_comment_count='{gr_comment_count}',gr_date='{gr_date}',gr_gu_seq_id='{gr_gu_seq_id}' 
+        gr_name='{gr_name}',gr_place='{gr_place}', gr_content_text='{gr_content_text}', gr_grade='{gr_grade}',gr_gu_seq_id='{gr_gu_seq_id}',gr_auth_count='{gr_auth_count}',gr_comment_count='{gr_comment_count}',gr_date='{gr_date}'
         WHERE gr_gu_seq_id={fk}"""
 
         try:

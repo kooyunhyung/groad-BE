@@ -29,13 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['15.165.25.66']
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-MEDIA_URL = '/media/'
-
-FILE_UPLOAD_MAX_MEMORY_SIZE = '2621440'
-
-
 # Application definition
 
 INSTALLED_APPS = [
