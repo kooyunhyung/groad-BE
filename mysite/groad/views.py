@@ -4,10 +4,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
 from django.db import connection
-from .models import user, alarm, qrcode, review, pedometer
+from .models import user
 import json
-from .serializer import UserSerializer, PedometerSerializer, ReviewSerializer, AlarmSerializer, QrcodeSerializer, \
-    LoginSerializer
+from .serializer import UserSerializer, LoginSerializer
 
 
 # user의 목록을 보여주는 역할
@@ -108,111 +107,6 @@ class Groad_user_Detail(APIView):
         }
         pedometer1 = self.get_object(pk)
         pedometer1.delete()
-        return JsonResponse(success_code)
-
-
-# pedometer의 목록을 보여주는 역할
-class Groad_pedometer_List(APIView):
-    def get(self, request):
-        try:
-            cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_pedometer")
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-
-        return Response(result, status=status.HTTP_200_OK)
-
-    def post(self, request):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-
-        data = json.loads(request.body)
-        gp_step = data.get('gp_step')
-        gp_gu_seq_id = data.get('gp_gu_seq_id')
-
-        sql = f"""INSERT INTO groad_pedometer(gp_step,gp_gu_seq_id)
-            value('{gp_step}','{gp_gu_seq_id}')"""
-
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-
-# pedometer의 detail을 보여주는 역할
-class Groad_pedometer_Detail(APIView):
-    def get(self, request, fk):
-        sql = f"""SELECT gp_seq, gp_step, gp_step, gp_gu_seq_id FROM groad_pedometer INNER JOIN groad_user 
-        ON gp_gu_seq_id=gu_seq WHERE gp_gu_seq_id={fk}
-        """
-
-        try:
-            cur = connection.cursor()
-
-            cur.execute(sql)
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-        return Response(result, status=status.HTTP_200_OK)
-
-    def put(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        data = json.loads(request.body)
-        gp_step = data.get('gp_step')
-        gp_gu_seq_id = data.get('gp_gu_seq_id')
-
-        sql = f"""UPDATE groad_pedometer SET gp_step='{gp_step}',gp_gu_seq_id='{gp_gu_seq_id}' WHERE gp_gu_seq_id={fk}"""
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-    def delete(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        sql = f"""DELETE FROM groad_pedometer WHERE gp_gu_seq_id={fk}"""
-
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
         return JsonResponse(success_code)
 
 
@@ -448,13 +342,12 @@ class Groad_alarm_Detail(APIView):
             cur.close()
         return JsonResponse(success_code)
 
-
-# qrcode의 목록을 보여주는 역할
-class Groad_qrcode_List(APIView):
+# course1position 의 목록을 보여주는 역할
+class Groad_course1position_List(APIView):
     def get(self, request):
         try:
             cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_qrcode")
+            cur.execute("SELECT * FROM groad_course1position")
             result = [dict((cur.description[i][0], value) \
                            for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
@@ -464,94 +357,47 @@ class Groad_qrcode_List(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
 
-    def post(self, request):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-
-        data = json.loads(request.body)
-        gq_qrcode = data.get('gq_qrcode')
-        gq_gu_seq_id = data.get('gq_gu_seq_id')
-
-        sql = f"""INSERT INTO groad_qrcode(gq_qrcode, gq_gu_seq_id)
-            value('{gq_qrcode}','{gq_gu_seq_id}')"""
-
+# course2position 의 목록을 보여주는 역할
+class Groad_course2position_List(APIView):
+    def get(self, request):
         try:
             cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-
-# qrcode의 detail을 보여주는 역할
-class Groad_qrcode_Detail(APIView):
-    def get(self, request, fk):
-        sql = f"""SELECT gq_seq, gq_qrcode, gq_gu_seq_id FROM groad_qrcode INNER JOIN groad_user 
-           ON gq_gu_seq_id=gu_seq WHERE gq_gu_seq_id={fk}
-           """
-
-        try:
-            cur = connection.cursor()
-
-            cur.execute(sql)
+            cur.execute("SELECT * FROM groad_course2position")
             result = [dict((cur.description[i][0], value) \
                            for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         finally:
             cur.close()
+
         return Response(result, status=status.HTTP_200_OK)
 
-    def put(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        data = json.loads(request.body)
-        gq_qrcode = data.get('gq_qrcode')
-        gq_gu_seq_id = data.get('gq_gu_seq_id')
-
-        sql = f"""UPDATE groad_qrcode SET 
-           gq_qrcode='{gq_qrcode}',gq_gu_seq_id='{gq_gu_seq_id}'
-           WHERE gq_gu_seq_id={fk}"""
-
+# course3position 의 목록을 보여주는 역할
+class Groad_course3position_List(APIView):
+    def get(self, request):
         try:
             cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
+            cur.execute("SELECT * FROM groad_course3position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
-            connection.rollback()
-            return JsonResponse(error_code)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         finally:
             cur.close()
-        return JsonResponse(success_code)
 
-    def delete(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        sql = f"""DELETE FROM groad_qrcode WHERE gq_gu_seq_id={fk}"""
+        return Response(result, status=status.HTTP_200_OK)
 
+# course4position 의 목록을 보여주는 역할
+class Groad_course4position_List(APIView):
+    def get(self, request):
         try:
             cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
+            cur.execute("SELECT * FROM groad_course4position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
-            connection.rollback()
-            return JsonResponse(error_code)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         finally:
             cur.close()
-        return JsonResponse(success_code)
+
+        return Response(result, status=status.HTTP_200_OK)
