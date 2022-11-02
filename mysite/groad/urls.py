@@ -19,6 +19,6 @@ urlpatterns = [
                   path('course2position/', views.Groad_course2position_List.as_view()),
                   path('course3position/', views.Groad_course3position_List.as_view()),
                   path('course4position/', views.Groad_course4position_List.as_view()),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

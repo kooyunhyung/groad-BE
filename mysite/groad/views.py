@@ -141,10 +141,11 @@ class Groad_review_List(APIView):
         gr_auth_count = data.get('gr_auth_count')
         gr_comment_count = data.get('gr_comment_count')
         gr_date = data.get('gr_date')
+        gr_content_image = data.get('gr_content_image')
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
-        sql = f"""INSERT INTO groad_review(gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count, gr_date)
-            value('{gr_name}','{gr_place}','{gr_content_text}','{gr_grade}','{gr_gu_seq_id}','{gr_auth_count}','{gr_comment_count}','{gr_date}')"""
+        sql = f"""INSERT INTO groad_review(gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count, gr_date, gr_content_image)
+            value('{gr_name}','{gr_place}','{gr_content_text}','{gr_grade}','{gr_gu_seq_id}','{gr_auth_count}','{gr_comment_count}','{gr_date}','{gr_content_image}')"""
 
         try:
             cur = connection.cursor()
@@ -162,7 +163,7 @@ class Groad_review_List(APIView):
 # review의 detail을 보여주는 역할
 class Groad_review_Detial(APIView):
     def get(self, request, fk):
-        sql = f"""SELECT gr_seq, gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count,gr_date FROM groad_review INNER JOIN groad_user 
+        sql = f"""SELECT gr_seq, gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count,gr_date, gr_content_image FROM groad_review INNER JOIN groad_user 
         ON gr_gu_seq_id=gu_seq WHERE gr_gu_seq_id={fk}
         """
 
@@ -193,10 +194,13 @@ class Groad_review_Detial(APIView):
         gr_auth_count = data.get('gr_auth_count')
         gr_comment_count = data.get('gr_comment_count')
         gr_date = data.get('gr_date')
+        gr_content_image = data.get('gr_content_image');
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
         sql = f"""UPDATE groad_review SET 
-        gr_name='{gr_name}',gr_place='{gr_place}', gr_content_text='{gr_content_text}', gr_grade='{gr_grade}',gr_gu_seq_id='{gr_gu_seq_id}',gr_auth_count='{gr_auth_count}',gr_comment_count='{gr_comment_count}',gr_date='{gr_date}'
+        gr_name='{gr_name}',gr_place='{gr_place}', gr_content_text='{gr_content_text}', 
+        gr_grade='{gr_grade}',gr_gu_seq_id='{gr_gu_seq_id}',gr_auth_count='{gr_auth_count}',
+        gr_comment_count='{gr_comment_count}',gr_date='{gr_date}',gr_content_image='{gr_content_image}'
         WHERE gr_gu_seq_id={fk}"""
 
         try:
@@ -342,6 +346,7 @@ class Groad_alarm_Detail(APIView):
             cur.close()
         return JsonResponse(success_code)
 
+
 # course1position 의 목록을 보여주는 역할
 class Groad_course1position_List(APIView):
     def get(self, request):
@@ -356,6 +361,7 @@ class Groad_course1position_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
 
 # course2position 의 목록을 보여주는 역할
 class Groad_course2position_List(APIView):
@@ -372,6 +378,7 @@ class Groad_course2position_List(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
 
+
 # course3position 의 목록을 보여주는 역할
 class Groad_course3position_List(APIView):
     def get(self, request):
@@ -386,6 +393,7 @@ class Groad_course3position_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
 
 # course4position 의 목록을 보여주는 역할
 class Groad_course4position_List(APIView):
