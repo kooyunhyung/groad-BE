@@ -296,12 +296,12 @@ class Groad_review_Detial(APIView):
         return JsonResponse(success_code)
 
 
-# alarm의 목록을 보여주는 역할
-class Groad_alarm_List(APIView):
+# setting의 목록을 보여주는 역할
+class Groad_setting_List(APIView):
     def get(self, request):
         try:
             cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_alarm")
+            cur.execute("SELECT * FROM groad_setting")
             result = [dict((cur.description[i][0], value) \
                            for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
@@ -320,13 +320,15 @@ class Groad_alarm_List(APIView):
         }
 
         data = json.loads(request.body)
-        ga_onoff1 = data.get('ga_onoff1')
-        ga_onoff2 = data.get('ga_onoff2')
-        ga_onoff3 = data.get('ga_onoff3')
-        ga_gu_seq_id = data.get('ga_gu_seq_id')
+        gs_map = data.get('gs_map')
+        gs_theme = data.get('gs_theme')
+        gs_onoff1 = data.get('gs_onoff1')
+        gs_onoff2 = data.get('gs_onoff2')
+        gs_onoff3 = data.get('gs_onoff3')
+        gs_gu_seq_id = data.get('gs_gu_seq_id')
 
-        sql = f"""INSERT INTO groad_alarm(ga_onoff1, ga_onoff2, ga_onoff3, ga_gu_seq_id)
-            value('{ga_onoff1}','{ga_onoff2}','{ga_onoff3}','{ga_gu_seq_id}')"""
+        sql = f"""INSERT INTO groad_setting(gs_map, gs_theme, gs_onoff1, gs_onoff2, gs_onoff3, gs_gu_seq_id)
+            value('{gs_map}','{gs_theme}','{gs_onoff1}','{gs_onoff2}','{gs_onoff3}','{gs_gu_seq_id}')"""
 
         try:
             cur = connection.cursor()
@@ -341,10 +343,10 @@ class Groad_alarm_List(APIView):
 
 
 # alarm의 detail을 보여주는 역할
-class Groad_alarm_Detail(APIView):
+class Groad_setting_Detail(APIView):
     def get(self, request, fk):
-        sql = f"""SELECT ga_seq, ga_onoff1, ga_onoff2, ga_onoff3, ga_gu_seq_id FROM groad_alarm INNER JOIN groad_user 
-        ON ga_gu_seq_id=gu_seq WHERE ga_gu_seq_id={fk}
+        sql = f"""SELECT gs_seq, gs_map, gs_theme, gs_onoff1, gs_onoff2, gs_onoff3, gs_gu_seq_id FROM groad_setting INNER JOIN groad_user 
+        ON gs_gu_seq_id=gu_seq WHERE gs_gu_seq_id={fk}
         """
 
         try:
@@ -367,34 +369,16 @@ class Groad_alarm_Detail(APIView):
             'code': 200
         }
         data = json.loads(request.body)
-        ga_onoff1 = data.get('ga_onoff1')
-        ga_onoff2 = data.get('ga_onoff2')
-        ga_onoff3 = data.get('ga_onoff3')
-        ga_gu_seq_id = data.get('ga_gu_seq_id')
+        gs_map = data.get('gs_map')
+        gs_theme = data.get('gs_theme')
+        gs_onoff1 = data.get('gs_onoff1')
+        gs_onoff2 = data.get('gs_onoff2')
+        gs_onoff3 = data.get('gs_onoff3')
+        gs_gu_seq_id = data.get('gs_gu_seq_id')
 
-        sql = f"""UPDATE groad_alarm SET 
-        ga_onoff1='{ga_onoff1}',ga_onoff2='{ga_onoff2}', ga_onoff3='{ga_onoff3}', ga_gu_seq_id='{ga_gu_seq_id}'
-        WHERE ga_gu_seq_id={fk}"""
-
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-    def delete(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        sql = f"""DELETE FROM groad_alarm WHERE ga_gu_seq_id={fk}"""
+        sql = f"""UPDATE groad_setting SET 
+        gs_map = '{gs_map}',gs_theme='{gs_theme}',gs_onoff1='{gs_onoff1}',gs_onoff2='{gs_onoff2}', gs_onoff3='{gs_onoff3}', gs_gu_seq_id='{gs_gu_seq_id}'
+        WHERE gs_gu_seq_id={fk}"""
 
         try:
             cur = connection.cursor()
@@ -406,7 +390,6 @@ class Groad_alarm_Detail(APIView):
         finally:
             cur.close()
         return JsonResponse(success_code)
-
 
 # course1position 의 목록을 보여주는 역할
 class Groad_course1position_List(APIView):

@@ -30,15 +30,6 @@ class review(models.Model):
     gr_content_image = models.CharField(max_length=500, verbose_name='장소', null=True)
     gr_gu_seq = models.ForeignKey(user, verbose_name='리뷰어', on_delete=models.CASCADE, related_name='gr_gu_seq')
 
-
-class alarm(models.Model):
-    ga_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
-                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
-    ga_onoff1 = models.BooleanField(default=False)
-    ga_onoff2 = models.BooleanField(default=False)
-    ga_onoff3 = models.BooleanField(default=False)
-    ga_gu_seq = models.ForeignKey(user, verbose_name='알리머', on_delete=models.CASCADE, related_name='ga_gu_seq')
-
 class course1Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
@@ -97,3 +88,15 @@ class inquiry(models.Model):
     gi_title = models.CharField(max_length=30, null=True)
     gi_contents = models.CharField(max_length=200, null=True)
     gi_gu_seq = models.ForeignKey(user, on_delete=models.CASCADE, related_name='gi_gu_seq')
+
+class setting(models.Model):
+    gs_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gs_map = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)],
+                                        default=0, null=True)
+    gs_theme = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)],
+                                        default=0, null=True)
+    gs_onoff1 = models.BooleanField(default=False)
+    gs_onoff2 = models.BooleanField(default=False)
+    gs_onoff3 = models.BooleanField(default=False)
+    gs_gu_seq = models.ForeignKey(user, on_delete=models.CASCADE, related_name='gs_gu_seq')

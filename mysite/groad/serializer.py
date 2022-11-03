@@ -1,4 +1,4 @@
-from .models import user, alarm, review, course1Position, course2Position, course3Position, course4Position
+from .models import user, review, course1Position, course2Position, course3Position, course4Position
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,11 +14,6 @@ class LoginSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = review
-        fields = '__all__'
-
-class AlarmSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = alarm
         fields = '__all__'
 
 class Course1PositionSerializer(serializers.ModelSerializer):
