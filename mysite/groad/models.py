@@ -42,10 +42,10 @@ class alarm(models.Model):
 class course1Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
-    gc_main_image = models.CharField(max_length=100, null=True)
-    gc_sub_image1 = models.CharField(max_length=100, null=True)
-    gc_sub_image2 = models.CharField(max_length=100, null=True)
-    gc_sub_image3 = models.CharField(max_length=100, null=True)
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
     gc_text = models.CharField(max_length=2000, null=True)
     gc_traffic12 = models.CharField(max_length=1000, null=True)
     gc_traffic23 = models.CharField(max_length=1000, null=True)
@@ -55,10 +55,10 @@ class course1Position(models.Model):
 class course2Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
-    gc_main_image = models.CharField(max_length=100, null=True)
-    gc_sub_image1 = models.CharField(max_length=100, null=True)
-    gc_sub_image2 = models.CharField(max_length=100, null=True)
-    gc_sub_image3 = models.CharField(max_length=100, null=True)
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
     gc_text = models.CharField(max_length=2000, null=True)
     gc_traffic12 = models.CharField(max_length=1000, null=True)
     gc_traffic23 = models.CharField(max_length=1000, null=True)
@@ -68,10 +68,10 @@ class course2Position(models.Model):
 class course3Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
-    gc_main_image = models.CharField(max_length=100, null=True)
-    gc_sub_image1 = models.CharField(max_length=100, null=True)
-    gc_sub_image2 = models.CharField(max_length=100, null=True)
-    gc_sub_image3 = models.CharField(max_length=100, null=True)
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
     gc_text = models.CharField(max_length=2000, null=True)
     gc_traffic12 = models.CharField(max_length=1000, null=True)
     gc_traffic23 = models.CharField(max_length=1000, null=True)
@@ -81,12 +81,19 @@ class course3Position(models.Model):
 class course4Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
-    gc_main_image = models.CharField(max_length=100, null=True)
-    gc_sub_image1 = models.CharField(max_length=100, null=True)
-    gc_sub_image2 = models.CharField(max_length=100, null=True)
-    gc_sub_image3 = models.CharField(max_length=100, null=True)
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
     gc_text = models.CharField(max_length=2000, null=True)
     gc_traffic12 = models.CharField(max_length=1000, null=True)
     gc_traffic23 = models.CharField(max_length=1000, null=True)
     gc_traffic34 = models.CharField(max_length=1000, null=True)
     gc_traffic45 = models.CharField(max_length=1000, null=True)
+
+class inquiry(models.Model):
+    gi_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gi_title = models.CharField(max_length=30, null=True)
+    gi_contents = models.CharField(max_length=200, null=True)
+    gi_gu_seq = models.ForeignKey(user, on_delete=models.CASCADE, related_name='gi_gu_seq')

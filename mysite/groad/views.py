@@ -109,6 +109,67 @@ class Groad_user_Detail(APIView):
         pedometer1.delete()
         return JsonResponse(success_code)
 
+# inquiry의 목록을 보여주는 역할
+class Groad_inquiry_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_inquiry")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+
+        data = json.loads(request.body)
+        gi_title = data.get('gi_title')
+        gi_contents = data.get('gi_contents')
+        gi_gu_seq_id = data.get('gi_gu_seq_id')
+
+        sql = f"""INSERT INTO groad_inquiry(gi_title, gi_contents, gi_gu_seq_id)
+            value('{gi_title}','{gi_contents}','{gi_gu_seq_id}')"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except Exception as e:
+            print(e)
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+# inquiry의 detail을 보여주는 역할
+class Groad_inquiry_Detial(APIView):
+    def get(self, request, fk):
+        sql = f"""SELECT gi_seq, gi_title, gi_contents, gi_gu_seq_id FROM groad_inquiry INNER JOIN groad_user 
+        ON gi_gu_seq_id=gu_seq WHERE gi_gu_seq_id={fk}
+        """
+
+        try:
+            cur = connection.cursor()
+
+            cur.execute(sql)
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+        return Response(result, status=status.HTTP_200_OK)
 
 # review의 목록을 보여주는 역할
 class Groad_review_List(APIView):
