@@ -42,8 +42,8 @@ class Groad_user_List(APIView):
         gu_phone_number = data.get('gu_phone_number')
 
         sql = f"""INSERT INTO groad_user
-        (gu_id, gu_pw, gu_name, gu_gender, gu_birth_date, gu_email, gu_phone_number)
-            value('{gu_id}','{gu_pw}','{gu_name}','{gu_gender}','{gu_birth_date}','{gu_email}','{gu_phone_number}')
+        (gu_id, gu_pw, gu_name, gu_gender, gu_birth_date, gu_email, gu_phone_number, gu_point_number)
+            value('{gu_id}','{gu_pw}','{gu_name}','{gu_gender}','{gu_birth_date}','{gu_email}','{gu_phone_number}',0)
         """
         try:
             cur = connection.cursor()
