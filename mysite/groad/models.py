@@ -13,6 +13,8 @@ class user(models.Model):
     gu_birth_date = models.CharField(max_length=20, verbose_name='생년월일', null=True)
     gu_email = models.CharField(max_length=40, verbose_name='이메일', null=True)
     gu_phone_number = models.CharField(max_length=11, verbose_name='핸드폰번호', null=True)
+    gu_point_number = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
+                                   verbose_name='포인트', default=0, null=True)
 
 class review(models.Model):
     gr_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
