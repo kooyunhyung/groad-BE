@@ -391,57 +391,12 @@ class Groad_setting_Detail(APIView):
             cur.close()
         return JsonResponse(success_code)
 
-# travelcourse1 의 목록을 보여주는 역할
-class Groad_travelcourse1_List(APIView):
+# travelcourse 의 목록을 보여주는 역할
+class Groad_travelcourse_List(APIView):
     def get(self, request):
         try:
             cur = connection.cursor()
             cur.execute("SELECT * FROM groad_travelcourse1")
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-
-        return Response(result, status=status.HTTP_200_OK)
-
-# travelcourse2 의 목록을 보여주는 역할
-class Groad_travelcourse2_List(APIView):
-    def get(self, request):
-        try:
-            cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_travelcourse2")
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-
-        return Response(result, status=status.HTTP_200_OK)
-
-# travelcourse3 의 목록을 보여주는 역할
-class Groad_travelcourse3_List(APIView):
-    def get(self, request):
-        try:
-            cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_travelcourse3")
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-
-        return Response(result, status=status.HTTP_200_OK)
-
-# travelcourse4 의 목록을 보여주는 역할
-class Groad_travelcourse4_List(APIView):
-    def get(self, request):
-        try:
-            cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_travelcourse4")
             result = [dict((cur.description[i][0], value) \
                            for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
