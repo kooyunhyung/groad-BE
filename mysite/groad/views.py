@@ -396,7 +396,7 @@ class Groad_travelcourse_List(APIView):
     def get(self, request):
         try:
             cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_travelcourse1")
+            cur.execute("SELECT * FROM groad_travelcourse")
             result = [dict((cur.description[i][0], value) \
                            for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
