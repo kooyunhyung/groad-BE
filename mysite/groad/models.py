@@ -62,6 +62,7 @@ class travelcourse(models.Model):
     gt_course_key = models.IntegerField(null=True)
     gt_distance = models.FloatField(null=True)
     gt_time = models.CharField(max_length=20,null=True)
+    gt_title_image = models.CharField(max_length=100,null=True)
 
 class course1Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
@@ -103,6 +104,71 @@ class course3Position(models.Model):
     gc_traffic45 = models.CharField(max_length=1000, null=True)
 
 class course4Position(models.Model):
+    gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
+    gc_text = models.CharField(max_length=2000, null=True)
+    gc_traffic12 = models.CharField(max_length=1000, null=True)
+    gc_traffic23 = models.CharField(max_length=1000, null=True)
+    gc_traffic34 = models.CharField(max_length=1000, null=True)
+    gc_traffic45 = models.CharField(max_length=1000, null=True)
+
+class course5Position(models.Model):
+    gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
+    gc_text = models.CharField(max_length=2000, null=True)
+    gc_traffic12 = models.CharField(max_length=1000, null=True)
+    gc_traffic23 = models.CharField(max_length=1000, null=True)
+    gc_traffic34 = models.CharField(max_length=1000, null=True)
+    gc_traffic45 = models.CharField(max_length=1000, null=True)
+
+class course6Position(models.Model):
+    gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
+    gc_text = models.CharField(max_length=2000, null=True)
+    gc_traffic12 = models.CharField(max_length=1000, null=True)
+    gc_traffic23 = models.CharField(max_length=1000, null=True)
+    gc_traffic34 = models.CharField(max_length=1000, null=True)
+    gc_traffic45 = models.CharField(max_length=1000, null=True)
+
+class course7Position(models.Model):
+    gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
+    gc_text = models.CharField(max_length=2000, null=True)
+    gc_traffic12 = models.CharField(max_length=1000, null=True)
+    gc_traffic23 = models.CharField(max_length=1000, null=True)
+    gc_traffic34 = models.CharField(max_length=1000, null=True)
+    gc_traffic45 = models.CharField(max_length=1000, null=True)
+
+class course8Position(models.Model):
+    gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gc_main_image = models.CharField(max_length=500, null=True)
+    gc_sub_image1 = models.CharField(max_length=500, null=True)
+    gc_sub_image2 = models.CharField(max_length=500, null=True)
+    gc_sub_image3 = models.CharField(max_length=500, null=True)
+    gc_text = models.CharField(max_length=2000, null=True)
+    gc_traffic12 = models.CharField(max_length=1000, null=True)
+    gc_traffic23 = models.CharField(max_length=1000, null=True)
+    gc_traffic34 = models.CharField(max_length=1000, null=True)
+    gc_traffic45 = models.CharField(max_length=1000, null=True)
+
+class course9Position(models.Model):
     gc_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
     gc_main_image = models.CharField(max_length=500, null=True)

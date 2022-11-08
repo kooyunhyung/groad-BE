@@ -468,3 +468,78 @@ class Groad_course4position_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
+# course5position 의 목록을 보여주는 역할
+class Groad_course5position_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_course5position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# course6position 의 목록을 보여주는 역할
+class Groad_course6position_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_course6position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# course7position 의 목록을 보여주는 역할
+class Groad_course7position_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_course7position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# course8position 의 목록을 보여주는 역할
+class Groad_course8position_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_course8position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# course9position 의 목록을 보여주는 역할
+class Groad_course9position_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_course9position")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)

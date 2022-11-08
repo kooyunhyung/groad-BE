@@ -22,6 +22,11 @@ urlpatterns = [
     path('course2position/', views.Groad_course2position_List.as_view()),
     path('course3position/', views.Groad_course3position_List.as_view()),
     path('course4position/', views.Groad_course4position_List.as_view()),
+    path('course5position/', views.Groad_course5position_List.as_view()),
+    path('course6position/', views.Groad_course6position_List.as_view()),
+    path('course7position/', views.Groad_course7position_List.as_view()),
+    path('course8position/', views.Groad_course8position_List.as_view()),
+    path('course9position/', views.Groad_course9position_List.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
