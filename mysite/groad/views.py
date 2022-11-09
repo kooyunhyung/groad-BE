@@ -202,14 +202,12 @@ class Groad_review_List(APIView):
         gr_place = data.get('gr_place')
         gr_content_text = data.get('gr_content_text')
         gr_grade = data.get('gr_grade')
-        gr_auth_count = data.get('gr_auth_count')
-        gr_comment_count = data.get('gr_comment_count')
         gr_date = data.get('gr_date')
         gr_content_image = data.get('gr_content_image')
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
-        sql = f"""INSERT INTO groad_review(gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count, gr_date, gr_content_image)
-            value('{gr_name}','{gr_place}','{gr_content_text}','{gr_grade}','{gr_gu_seq_id}','{gr_auth_count}','{gr_comment_count}','{gr_date}','{gr_content_image}')"""
+        sql = f"""INSERT INTO groad_review(gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id,gr_date, gr_content_image)
+            value('{gr_name}','{gr_place}','{gr_content_text}','{gr_grade}','{gr_gu_seq_id}','{gr_date}','{gr_content_image}')"""
 
         try:
             cur = connection.cursor()
@@ -227,7 +225,7 @@ class Groad_review_List(APIView):
 # review의 detail을 보여주는 역할
 class Groad_review_Detial(APIView):
     def get(self, request, fk):
-        sql = f"""SELECT gr_seq, gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_auth_count, gr_comment_count,gr_date, gr_content_image FROM groad_review INNER JOIN groad_user 
+        sql = f"""SELECT gr_seq, gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_date, gr_content_image FROM groad_review INNER JOIN groad_user 
         ON gr_gu_seq_id=gu_seq WHERE gr_gu_seq_id={fk}
         """
 
@@ -255,16 +253,13 @@ class Groad_review_Detial(APIView):
         gr_place = data.get('gr_place')
         gr_content_text = data.get('gr_content_text')
         gr_grade = data.get('gr_grade')
-        gr_auth_count = data.get('gr_auth_count')
-        gr_comment_count = data.get('gr_comment_count')
         gr_date = data.get('gr_date')
         gr_content_image = data.get('gr_content_image')
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
         sql = f"""UPDATE groad_review SET 
         gr_name='{gr_name}',gr_place='{gr_place}', gr_content_text='{gr_content_text}', 
-        gr_grade='{gr_grade}',gr_gu_seq_id='{gr_gu_seq_id}',gr_auth_count='{gr_auth_count}',
-        gr_comment_count='{gr_comment_count}',gr_date='{gr_date}',gr_content_image='{gr_content_image}'
+        gr_grade='{gr_grade}',gr_gu_seq_id='{gr_gu_seq_id}',gr_date='{gr_date}',gr_content_image='{gr_content_image}'
         WHERE gr_gu_seq_id={fk}"""
 
         try:
@@ -400,120 +395,6 @@ class Groad_review_comment_Detial(APIView):
             'code': 200
         }
         sql = f"""DELETE FROM groad_review_comment WHERE grc_gr_seq_id={fk}"""
-
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-
-# review_share 의 목록을 보여주는 역할
-class Groad_review_share_List(APIView):
-    def get(self, request):
-        try:
-            cur = connection.cursor()
-            cur.execute("SELECT * FROM groad_review_share")
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-
-        return Response(result, status=status.HTTP_200_OK)
-
-    def post(self, request):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-
-        data = json.loads(request.body)
-        grs_flag = data.get('grs_flag')
-        grs_gr_seq_id = data.get('grs_gr_seq_id')
-        grs_gu_seq_id = data.get('grs_gu_seq_id')
-
-        sql = f"""INSERT INTO groad_review_share(grs_flag, grs_gr_seq_id, grs_gu_seq_id)
-            value('{grs_flag}','{grs_gr_seq_id}','{grs_gu_seq_id}')"""
-
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except Exception as e:
-            print(e)
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-
-# review_share 의 detail을 보여주는 역할
-class Groad_review_share_Detial(APIView):
-    def get(self, request, fk):
-        sql = f"""SELECT grs_seq, grs_flag, grs_gr_seq_id, grs_gu_seq_id FROM groad_review_share 
-        INNER JOIN groad_review ON grs_gr_seq_id = gr_seq 
-        INNER JOIN groad_user ON grs_gu_seq_id = gu_seq 
-        WHERE grs_gu_seq_id={fk}
-        """
-
-        try:
-            cur = connection.cursor()
-
-            cur.execute(sql)
-            result = [dict((cur.description[i][0], value) \
-                           for i, value in enumerate(row)) for row in cur.fetchall()]
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        finally:
-            cur.close()
-        return Response(result, status=status.HTTP_200_OK)
-
-    def put(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        data = json.loads(request.body)
-        grs_flag = data.get('grs_flag')
-        grs_gr_seq_id = data.get('grs_gr_seq_id')
-        grs_gu_seq_id = data.get('grs_gu_seq_id')
-
-        sql = f"""UPDATE groad_review_share SET 
-        grs_flag='{grs_flag}',grs_gr_seq_id='{grs_gr_seq_id}', 
-        grs_gu_seq_id='{grs_gu_seq_id}'
-        WHERE grs_gu_seq_id={fk}"""
-
-        try:
-            cur = connection.cursor()
-            cur.execute(sql)
-            connection.commit()
-        except:
-            connection.rollback()
-            return JsonResponse(error_code)
-        finally:
-            cur.close()
-        return JsonResponse(success_code)
-
-    def delete(self, request, fk):
-        error_code = {
-            'code': -3
-        }
-        success_code = {
-            'code': 200
-        }
-        sql = f"""DELETE FROM groad_review_share WHERE grs_gu_seq_id={fk}"""
 
         try:
             cur = connection.cursor()
