@@ -25,10 +25,6 @@ class review(models.Model):
     gr_content_text = models.CharField(max_length=100, verbose_name='코멘트', null=True)
     gr_grade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)],
                                    verbose_name='평점', default=0, null=True)
-    gr_auth_count = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
-                                        verbose_name='댓글수', default=0, null=True)
-    gr_comment_count = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
-                                           verbose_name='댓글수', default=0, null=True)
     gr_date = models.DateTimeField(null=True, default=0, verbose_name='게시 시간')
     gr_content_image = models.CharField(max_length=500, verbose_name='장소', null=True)
     gr_gu_seq = models.ForeignKey(user, verbose_name='리뷰어', on_delete=models.CASCADE, related_name='gr_gu_seq')
@@ -40,13 +36,6 @@ class review_comment(models.Model):
     grc_profile_image = models.CharField(max_length=500, null=True)
     grc_comment = models.CharField(max_length=300,null=True)
     grc_gr_seq = models.ForeignKey(review, on_delete=models.CASCADE, related_name='grc_gr_seq')
-
-class review_share(models.Model):
-    grs_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
-                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
-    grs_flag = models.BooleanField(default=False)
-    grs_gr_seq = models.ForeignKey(review, on_delete=models.CASCADE, related_name='grs_gr_seq')
-    grs_gu_seq = models.ForeignKey(user, on_delete=models.CASCADE, related_name='grs_gu_seq')
 
 class travelcourse(models.Model):
     gt_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',

@@ -15,8 +15,6 @@ urlpatterns = [
     path('review/<int:fk>/', views.Groad_review_Detial.as_view()),  # review의 Detail 목록
     path('review_comment/', views.Groad_review_comment_List.as_view()),
     path('review_comment/<int:fk>', views.Groad_review_comment_Detial.as_view()),
-    path('review_share/', views.Groad_review_share_List.as_view()),
-    path('review_share/<int:fk>', views.Groad_review_share_Detial.as_view()),
     path('inquiry/', views.Groad_inquiry_List.as_view()),
     path('inquiry/<int:fk>', views.Groad_inquiry_Detial.as_view()),
     path('setting/', views.Groad_setting_List.as_view()),
