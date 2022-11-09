@@ -109,6 +109,7 @@ class Groad_user_Detail(APIView):
         pedometer1.delete()
         return JsonResponse(success_code)
 
+
 # inquiry의 목록을 보여주는 역할
 class Groad_inquiry_List(APIView):
     def get(self, request):
@@ -152,6 +153,7 @@ class Groad_inquiry_List(APIView):
             cur.close()
         return JsonResponse(success_code)
 
+
 # inquiry의 detail을 보여주는 역할
 class Groad_inquiry_Detial(APIView):
     def get(self, request, fk):
@@ -170,6 +172,7 @@ class Groad_inquiry_Detial(APIView):
         finally:
             cur.close()
         return Response(result, status=status.HTTP_200_OK)
+
 
 # review의 목록을 보여주는 역할
 class Groad_review_List(APIView):
@@ -255,7 +258,7 @@ class Groad_review_Detial(APIView):
         gr_auth_count = data.get('gr_auth_count')
         gr_comment_count = data.get('gr_comment_count')
         gr_date = data.get('gr_date')
-        gr_content_image = data.get('gr_content_image');
+        gr_content_image = data.get('gr_content_image')
         gr_gu_seq_id = data.get('gr_gu_seq_id')
 
         sql = f"""UPDATE groad_review SET 
@@ -283,6 +286,234 @@ class Groad_review_Detial(APIView):
             'code': 200
         }
         sql = f"""DELETE FROM groad_review WHERE gr_gu_seq_id={fk}"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except:
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+
+# review_comment 의 목록을 보여주는 역할
+class Groad_review_comment_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_review_comment")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+
+        data = json.loads(request.body)
+        grc_name = data.get('grc_name')
+        grc_profile_image = data.get('grc_profile_image')
+        grc_comment = data.get('grc_comment')
+        grc_gr_seq_id = data.get('grc_gr_seq_id')
+
+        sql = f"""INSERT INTO groad_review_comment(grc_name, grc_profile_image, grc_comment, grc_gr_seq_id)
+            value('{grc_name}','{grc_profile_image}','{grc_comment}','{grc_gr_seq_id}')"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except Exception as e:
+            print(e)
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+
+# review_comment 의 detail을 보여주는 역할
+class Groad_review_comment_Detial(APIView):
+    def get(self, request, fk):
+        sql = f"""SELECT grc_seq, grc_name, grc_profile_image, grc_comment, grc_gr_seq_id FROM groad_review_comment INNER JOIN groad_review 
+        ON grc_gr_seq_id = gr_seq WHERE grc_gr_seq_id={fk}
+        """
+
+        try:
+            cur = connection.cursor()
+
+            cur.execute(sql)
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+        return Response(result, status=status.HTTP_200_OK)
+
+    def put(self, request, fk):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+        data = json.loads(request.body)
+        grc_name = data.get('grc_name')
+        grc_profile_image = data.get('grc_profile_image')
+        grc_comment = data.get('grc_comment')
+        grc_gr_seq_id = data.get('grc_gr_seq_id')
+
+        sql = f"""UPDATE groad_review_comment SET 
+        grc_name='{grc_name}',grc_profile_image='{grc_profile_image}', grc_comment='{grc_comment}', 
+        grc_gr_seq_id='{grc_gr_seq_id}'
+        WHERE grc_gr_seq_id={fk}"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except:
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+    def delete(self, request, fk):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+        sql = f"""DELETE FROM groad_review_comment WHERE grc_gr_seq_id={fk}"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except:
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+
+# review_share 의 목록을 보여주는 역할
+class Groad_review_share_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_review_share")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+
+        data = json.loads(request.body)
+        grs_flag = data.get('grs_flag')
+        grs_gr_seq_id = data.get('grs_gr_seq_id')
+        grs_gu_seq_id = data.get('grs_gu_seq_id')
+
+        sql = f"""INSERT INTO groad_review_share(grs_flag, grs_gr_seq_id, grs_gu_seq_id)
+            value('{grs_flag}','{grs_gr_seq_id}','{grs_gu_seq_id}')"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except Exception as e:
+            print(e)
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+
+# review_share 의 detail을 보여주는 역할
+class Groad_review_share_Detial(APIView):
+    def get(self, request, fk):
+        sql = f"""SELECT grs_seq, grs_flag, grs_gr_seq_id, grs_gu_seq_id FROM groad_review_share 
+        INNER JOIN groad_review ON grs_gr_seq_id = gr_seq 
+        INNER JOIN groad_user ON grs_gu_seq_id = gu_seq 
+        WHERE grs_gu_seq_id={fk}
+        """
+
+        try:
+            cur = connection.cursor()
+
+            cur.execute(sql)
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+        return Response(result, status=status.HTTP_200_OK)
+
+    def put(self, request, fk):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+        data = json.loads(request.body)
+        grs_flag = data.get('grs_flag')
+        grs_gr_seq_id = data.get('grs_gr_seq_id')
+        grs_gu_seq_id = data.get('grs_gu_seq_id')
+
+        sql = f"""UPDATE groad_review_share SET 
+        grs_flag='{grs_flag}',grs_gr_seq_id='{grs_gr_seq_id}', 
+        grs_gu_seq_id='{grs_gu_seq_id}'
+        WHERE grs_gu_seq_id={fk}"""
+
+        try:
+            cur = connection.cursor()
+            cur.execute(sql)
+            connection.commit()
+        except:
+            connection.rollback()
+            return JsonResponse(error_code)
+        finally:
+            cur.close()
+        return JsonResponse(success_code)
+
+    def delete(self, request, fk):
+        error_code = {
+            'code': -3
+        }
+        success_code = {
+            'code': 200
+        }
+        sql = f"""DELETE FROM groad_review_share WHERE grs_gu_seq_id={fk}"""
 
         try:
             cur = connection.cursor()
@@ -342,7 +573,7 @@ class Groad_setting_List(APIView):
         return JsonResponse(success_code)
 
 
-# alarm의 detail을 보여주는 역할
+# setting의 detail을 보여주는 역할
 class Groad_setting_Detail(APIView):
     def get(self, request, fk):
         sql = f"""SELECT gs_seq, gs_map, gs_theme, gs_onoff1, gs_onoff2, gs_onoff3, gs_gu_seq_id FROM groad_setting INNER JOIN groad_user 
@@ -391,6 +622,7 @@ class Groad_setting_Detail(APIView):
             cur.close()
         return JsonResponse(success_code)
 
+
 # travelcourse 의 목록을 보여주는 역할
 class Groad_travelcourse_List(APIView):
     def get(self, request):
@@ -405,6 +637,7 @@ class Groad_travelcourse_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
 
 # course1position 의 목록을 보여주는 역할
 class Groad_course1position_List(APIView):
@@ -469,6 +702,7 @@ class Groad_course4position_List(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
 
+
 # course5position 의 목록을 보여주는 역할
 class Groad_course5position_List(APIView):
     def get(self, request):
@@ -483,6 +717,7 @@ class Groad_course5position_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
 
 # course6position 의 목록을 보여주는 역할
 class Groad_course6position_List(APIView):
@@ -499,6 +734,7 @@ class Groad_course6position_List(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
 
+
 # course7position 의 목록을 보여주는 역할
 class Groad_course7position_List(APIView):
     def get(self, request):
@@ -514,6 +750,7 @@ class Groad_course7position_List(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
 
+
 # course8position 의 목록을 보여주는 역할
 class Groad_course8position_List(APIView):
     def get(self, request):
@@ -528,6 +765,7 @@ class Groad_course8position_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
 
 # course9position 의 목록을 보여주는 역할
 class Groad_course9position_List(APIView):
