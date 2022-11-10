@@ -225,6 +225,11 @@ class Groad_review_List(APIView):
 # review의 detail을 보여주는 역할
 class Groad_review_Detial(APIView):
     def get(self, request, fk):
+
+        error_code = {
+            'code': -3
+        }
+
         sql = f"""SELECT gr_seq, gr_name, gr_place, gr_content_text, gr_grade, gr_gu_seq_id, gr_date, gr_content_image FROM groad_review INNER JOIN groad_user 
         ON gr_gu_seq_id=gu_seq WHERE gr_gu_seq_id={fk}
         """
@@ -236,7 +241,7 @@ class Groad_review_Detial(APIView):
             result = [dict((cur.description[i][0], value) \
                            for i, value in enumerate(row)) for row in cur.fetchall()]
         except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(error_code)
         finally:
             cur.close()
         return Response(result, status=status.HTTP_200_OK)
