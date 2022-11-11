@@ -12,7 +12,7 @@ urlpatterns = [
     path('user/login/', views.Groad_user_login.as_view()),  # user의 login
     path('user/<int:pk>/', views.Groad_user_Detail.as_view()),  # user의 Detail 목록
     path('review/', views.Groad_review_List.as_view()),  # review의 목록
-    path('review/<int:fk>/', views.Groad_review_Detial.as_view()),  # review의 Detail 목록
+    path('review/<int:pk>/', views.Groad_review_Detial.as_view()),  # review의 Detail 목록
     path('review_comment/', views.Groad_review_comment_List.as_view()),
     path('review_comment/<int:fk>', views.Groad_review_comment_Detial.as_view()),
     path('inquiry/', views.Groad_inquiry_List.as_view()),

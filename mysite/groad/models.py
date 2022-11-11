@@ -27,6 +27,7 @@ class review(models.Model):
                                    verbose_name='평점', default=0, null=True)
     gr_date = models.DateTimeField(null=True, default=0, verbose_name='게시 시간')
     gr_content_image = models.CharField(max_length=500, verbose_name='장소', null=True)
+    gr_profile_image = models.CharField(max_length=500, verbose_name='프로필사진', null=True)
     gr_gu_seq = models.ForeignKey(user, verbose_name='리뷰어', on_delete=models.CASCADE, related_name='gr_gu_seq')
 
 class review_comment(models.Model):
