@@ -378,7 +378,7 @@ class Groad_review_comment_Detial(APIView):
         sql = f"""UPDATE groad_review_comment SET 
         grc_name='{grc_name}',grc_profile_image='{grc_profile_image}', grc_comment='{grc_comment}', 
         grc_gr_seq_id='{grc_gr_seq_id}'
-        WHERE grc_gr_seq_id={fk}"""
+        WHERE grc_seq={fk}"""
 
         try:
             cur = connection.cursor()
