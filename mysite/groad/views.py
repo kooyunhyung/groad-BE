@@ -666,3 +666,63 @@ class Groad_course9position_List(APIView):
             cur.close()
 
         return Response(result, status=status.HTTP_200_OK)
+
+# cafe_list 의 목록을 보여주는 역할
+class Groad_cafe_list_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_cafe_list")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# photo_list 의 목록을 보여주는 역할
+class Groad_photo_list_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_photo_list")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# lodging_list 의 목록을 보여주는 역할
+class Groad_lodging_list_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_lodging_list")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)
+
+# restaurant_list 의 목록을 보여주는 역할
+class Groad_restaurant_list_List(APIView):
+    def get(self, request):
+        try:
+            cur = connection.cursor()
+            cur.execute("SELECT * FROM groad_restaurant_list")
+            result = [dict((cur.description[i][0], value) \
+                           for i, value in enumerate(row)) for row in cur.fetchall()]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        finally:
+            cur.close()
+
+        return Response(result, status=status.HTTP_200_OK)

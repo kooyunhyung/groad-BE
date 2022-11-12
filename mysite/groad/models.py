@@ -187,6 +187,42 @@ class course9Position(models.Model):
     gc_traffic34 = models.CharField(max_length=1000, null=True)
     gc_traffic45 = models.CharField(max_length=1000, null=True)
 
+class cafe_list(models.Model):
+    gcl_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gcl_main_image = models.CharField(max_length=500, null=True)
+    gcl_name = models.CharField(max_length=100, null=True)
+    gcl_lat = models.FloatField(null=True)
+    gcl_lng = models.FloatField(null=True)
+    gcl_info = models.CharField(max_length=500, null=True)
+
+class photo_list(models.Model):
+    gpl_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gpl_main_image = models.CharField(max_length=500, null=True)
+    gpl_name = models.CharField(max_length=100, null=True)
+    gpl_lat = models.FloatField(null=True)
+    gpl_lng = models.FloatField(null=True)
+    gpl_info = models.CharField(max_length=500, null=True)
+
+class restaurant_list(models.Model):
+    grl_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    grl_main_image = models.CharField(max_length=500, null=True)
+    grl_name = models.CharField(max_length=100, null=True)
+    grl_lat = models.FloatField(null=True)
+    grl_lng = models.FloatField(null=True)
+    grl_info = models.CharField(max_length=500, null=True)
+
+class lodging_list(models.Model):
+    gll_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
+                              validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    gll_main_image = models.CharField(max_length=500, null=True)
+    gll_name = models.CharField(max_length=100, null=True)
+    gll_lat = models.FloatField(null=True)
+    gll_lng = models.FloatField(null=True)
+    gll_info = models.CharField(max_length=500, null=True)
+
 class inquiry(models.Model):
     gi_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
                               validators=[MinValueValidator(0), MaxValueValidator(9999)])
