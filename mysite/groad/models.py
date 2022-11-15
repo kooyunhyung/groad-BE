@@ -16,6 +16,8 @@ class user(models.Model):
     gu_point_number = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
                                    verbose_name='포인트', default=0, null=True)
     gu_profile_image = models.CharField(max_length=500,null=True)
+    gu_step_number = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99999)],
+                                   verbose_name='걸음', default=0, null=True)
 
 class review(models.Model):
     gr_seq = models.AutoField(primary_key=True, verbose_name='시퀀스',
