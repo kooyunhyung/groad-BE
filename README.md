@@ -23,6 +23,7 @@
 2. 데이터베이스 구조 (mariadb)
 
   db: graoddb
+  
       table: user
              column: gu_seq, gu_id, gu_pw, gu_name, gu_gender, gu_birth_date, gu_email, gu_phone_number, gu_point_number, gu_profile_image, gu_step_number
              
