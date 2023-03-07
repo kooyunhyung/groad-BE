@@ -38,3 +38,45 @@
        
       table: course1Position
              column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+
+      table: course2Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course3Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course4Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course5Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course6Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course7Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course8Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: course9Position
+             column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
+             
+      table: cafe_list
+             column: gcl_seq, gcl_main_image, gcl_name, gcl_lat, gcl_lng, gcl_info, gcl_course
+             
+      table: photo_list
+             column: gpl_seq, gpl_main_image, gpl_name, gpl_lat, gpl_lng, gpl_info, gpl_course
+             
+      table: restaurant_list
+             column: grl_seq, grl_main_image, grl_name, grl_lat, grl_lng, grl_info, grl_course
+             
+      table: lodging_list
+             column: gll_seq, gll_main_image, gll_name, gll_lat, gll_lng, gll_info, gll_course
+             
+      table: inquiry
+             column: gi_seq, gi_title, gi_contents, gi_gu_seq
+             
+      table: setting
+             column: gs_seq, gs_map, gs_theme, gs_onoff1, gs_onoff2, gs_onoff3, gs_gu_seq
