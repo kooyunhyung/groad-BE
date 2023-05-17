@@ -8,14 +8,7 @@
       <jdbc-url>jdbc:sqlite:C:\Users\kooyh\PycharmProjects\CapstoneProject\mysite\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="sampledb@localhost" uuid="2b2ba94a-e4c7-4c4a-9548-2d5df86ffdd8">
-      <driver-ref>mariadb</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://localhost:3306/sampledb</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="groaddb@groaddb.csz7kd2dcazm.ap-northeast-2.rds.amazonaws.com" uuid="43c77af6-1e52-47c5-8bf4-63d9f08c7060">
+    <data-source source="LOCAL" name="groaddb@groaddb.csz7kd2dcazm.ap-northeast-2.rds.amazonaws.com" uuid="49a8f65f-8314-401c-8c65-536dd6b05ddc">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
