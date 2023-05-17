@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'groaddb',
-        'USER': 'admin',
+        'NAME': 'groad',
+        'USER': 'kyh',
         'PASSWORD': 'wer273524178',
-        'HOST': 'groaddb.csz7kd2dcazm.ap-northeast-2.rds.amazonaws.com',
+        'HOST': '210.115.229.254',
         'PORT': '3306',
     }
 }
