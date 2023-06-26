@@ -22,6 +22,12 @@
           'PORT': '{DATABASE_PORT}',
       }
 
+  manage.py 파일이 존재하는 디렉토리로 이동한 후 다음 명령어를 입력하여 models.py에 작성해둔 django ORM 코드가 실제 DB에 반영되도록 합니다.
+
+    python manage.py makemigrations [app_name]
+
+    python manage.py migrate [app_name] [migration_name]
+
   manage.py 파일이 존재하는 디렉토리로 이동한 후 다음 명령어를 입력하여 서버를 구동합니다.
 
     python manage.py runserver
