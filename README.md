@@ -2,7 +2,11 @@
 
   한림대학교 캡스톤 디자인 춘천 관광 앱 (GROAD) -> django framework 이용한 python 코드 (백엔드)
 
-3. groad_app 서버와의 통신 구현 위한 API
+# 시작하기
+  로컬 환경에 깃을 설치하고 원하는 디렉토리에 다음 명령어를 입력하여 코드를 다운 받습니다.
+
+  git clone 
+# groad_app 서버와의 통신 구현 위한 API
 
 ▶ 유저정보, 로그인 (GET, POST, UPDATE, DELETE)
   
