@@ -1,8 +1,8 @@
-# django_groad
+# 프로젝트 이름
 
-한림대학교 캡스톤 디자인 춘천 관광 앱 => django framework 이용한 python 코드 (백엔드)
+  한림대학교 캡스톤 디자인 춘천 관광 앱 (GROAD) -> django framework 이용한 python 코드 (백엔드)
 
-1. groad_app 서버와의 통신 구현 위한 API
+3. groad_app 서버와의 통신 구현 위한 API
 
 ▶ 유저정보, 로그인 (GET, POST, UPDATE, DELETE)
   
@@ -20,7 +20,7 @@
 
 ▶ 숙소 리스트 정보 (GET)
 
-2. 데이터베이스 구조 (mariadb)
+4. 데이터베이스 구조 (mariadb)
 
   db: graoddb
   
@@ -34,7 +34,10 @@
              column: grc_seq, grc_name, grc_profile_image, grc_comment, grc_gr_seq
              
       table: tavelcourse
-             column: gt_seq, gt_course_title, gt_course_name1, gt_course_name2, gt_course_name3, gt_course_name4, gt_course_name5, gt_course_Id1, gt_course_Id2, gt_course_Id3, gt_course_Id4, gt_course_Id5, gt_course_lat1, gt_course_lat2, gt_course_lat3, gt_course_lat4, gt_course_lat5, gt_course_lng1, gt_course_lng2, gt_course_lng3, gt_course_lng4, gt_course_lng5, gt_camera_lat, gt_camera_lng, gt_zoom, gt_course_key, gt_distance, gt_time, gt_title_image
+             column: gt_seq, gt_course_title, gt_course_name1, gt_course_name2, gt_course_name3, gt_course_name4, gt_course_name5, gt_course_Id1, gt_course_Id2,
+             gt_course_Id3, gt_course_Id4, gt_course_Id5, gt_course_lat1, gt_course_lat2, gt_course_lat3, gt_course_lat4, gt_course_lat5, gt_course_lng1, 
+             gt_course_lng2, gt_course_lng3, gt_course_lng4, gt_course_lng5, gt_camera_lat, gt_camera_lng, gt_zoom, gt_course_key, gt_distance, gt_time, 
+             gt_title_image
        
       table: course1Position
              column: gc_seq, gc_main_image, gc_sub_image1, gc_sub_image2, gc_sub_image3, gc_text, gc_traffic12, gc_traffic23, gc_traffic34, gc_traffic45
