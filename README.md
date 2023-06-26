@@ -7,6 +7,18 @@
 
     git clone https://github.com/kooyunhyung/groad-BE.git
 
+  mysite/settings.py 파일에 HOST와 DATABASE 설정을 해야합니다.
+
+    DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',
+          'NAME': 'groad',
+          'USER': '{DATABASE_ID}',
+          'PASSWORD': '{DATABASE_PASSWORD}',
+          'HOST': '{HOST_IP_ADDRESS}',
+          'PORT': '{DATABASE_PORT}',
+      }
+
   manage.py 파일이 존재하는 디렉토리로 이동한 후 다음 명령어를 입력하여 서버를 구동합니다.
 
     python manage.py runserver
