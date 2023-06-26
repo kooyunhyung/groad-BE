@@ -5,7 +5,8 @@
 # 시작하기
   로컬 환경에 깃을 설치하고 원하는 디렉토리에 다음 명령어를 입력하여 코드를 다운 받습니다.
 
-  git clone 
+    git clone https://github.com/kooyunhyung/groad-BE.git
+    
 # groad_app 서버와의 통신 구현 위한 API
 
 ▶ 유저정보, 로그인 (GET, POST, UPDATE, DELETE)
