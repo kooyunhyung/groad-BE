@@ -6,6 +6,10 @@
   로컬 환경에 깃을 설치하고 원하는 디렉토리에 다음 명령어를 입력하여 코드를 다운 받습니다.
 
     git clone https://github.com/kooyunhyung/groad-BE.git
+
+  manage.py 파일이 존재하는 디렉토리로 이동한 후 다음 명령어를 입력하여 서버를 구동합니다.
+
+    python manage.py runserver
     
 # groad_app 서버와의 통신 구현 위한 API
 
