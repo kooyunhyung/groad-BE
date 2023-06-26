@@ -9,6 +9,9 @@
 
   mysite/settings.py 파일에 HOST와 DATABASE 설정을 해야합니다.
 
+    ALLOWED_HOSTS = ['{HOST_IP_ADDRESS}']
+    
+
     DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.mysql',
