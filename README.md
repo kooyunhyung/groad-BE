@@ -2,6 +2,34 @@
 
   한림대학교 캡스톤 디자인 춘천 관광 앱 (GROAD) -> django framework 이용한 python 코드 (백엔드)
 
+# 설치
+
+  python 코드를 작성할 수 있는 개발환경 툴을 열고 Django를 설치합니다.
+
+    pip install django
+
+# 파일 구조
+
+    mysite/
+    ├── .idea
+    ├── mysite
+    ├── polls
+    ├── templates/admin
+    ├── db.sqlite3
+    ├── manage.py
+    └── groad
+        ├── __init__.py
+        ├── admin.py
+        ├── apps.py
+        ├── migrations
+        │   └── __init__.py
+        ├── models.py
+        ├── serializer.py
+        ├── tests.py
+        ├── urls.py
+        └── views.py
+    
+
 # 시작하기
   로컬 환경에 깃을 설치하고 원하는 디렉토리에 다음 명령어를 입력하여 코드를 다운 받습니다.
 
@@ -32,7 +60,7 @@
 
     python manage.py runserver
     
-# groad_app 서버와의 통신 구현 위한 API
+# 클라이언트와의 통신 구현 위한 API 정보
 
 ▶ 유저정보, 로그인 (GET, POST, UPDATE, DELETE)
   
@@ -50,7 +78,7 @@
 
 ▶ 숙소 리스트 정보 (GET)
 
-4. 데이터베이스 구조 (mariadb)
+# 데이터베이스 구조 (mariadb)
 
   db: graoddb
   
