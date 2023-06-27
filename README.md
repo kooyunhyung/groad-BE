@@ -8,6 +8,10 @@
 
     pip install django
 
+  DJANGO REST FRAMEWORK로 API 를 만들기 위해 django restframework를 설치합니다.
+
+    pip install djangorestframework
+
 # 파일 구조
 
     mysite/
@@ -141,3 +145,22 @@
              
       table: setting
              column: gs_seq, gs_map, gs_theme, gs_onoff1, gs_onoff2, gs_onoff3, gs_gu_seq
+             
+# REST API 문서
+
+![스크린샷 2023-06-27 213633](https://github.com/kooyunhyung/groad-BE/assets/77048218/2562a356-8821-4779-b0fb-986724e2b188)
+
+![스크린샷 2023-06-27 213705](https://github.com/kooyunhyung/groad-BE/assets/77048218/aebd63e6-c0b1-4d74-91fa-f73427c62a44)
+
+![스크린샷 2023-06-27 213735](https://github.com/kooyunhyung/groad-BE/assets/77048218/0ba31063-fd74-4266-a0c7-c7d9c7ed9a00)
+
+![스크린샷 2023-06-27 213751](https://github.com/kooyunhyung/groad-BE/assets/77048218/493983c5-45b7-4f76-b5a4-5b8000dc689e)
+
+![스크린샷 2023-06-27 213833](https://github.com/kooyunhyung/groad-BE/assets/77048218/a16fc456-df3e-4510-8fac-6153fd54ec87)
+
+![스크린샷 2023-06-27 213852](https://github.com/kooyunhyung/groad-BE/assets/77048218/93696e6b-ef5a-46c5-9b9f-98d56f15cc7c)
+
+![스크린샷 2023-06-27 213906](https://github.com/kooyunhyung/groad-BE/assets/77048218/11c18981-34d7-4f63-8a2c-70a55ef44756)
+
+
+    
