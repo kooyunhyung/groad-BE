@@ -145,6 +145,10 @@
              
       table: setting
              column: gs_seq, gs_map, gs_theme, gs_onoff1, gs_onoff2, gs_onoff3, gs_gu_seq
+
+# ERD
+
+![groadtest](https://github.com/kooyunhyung/groad-BE/assets/77048218/f005671f-0051-4aca-a2a3-e2a8e64d0b8d)
              
 # REST API 문서
 
